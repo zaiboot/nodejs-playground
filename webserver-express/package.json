@@ -1,0 +1,14 @@
+{
+  "name": "TheBoard",
+  "version": "0.0.0",
+  "description": "TheBoard",
+//  "main": "server.js",
+  "main": "server.express.js",
+  "author": {
+    "name": "zaiboot",
+    "email": "zaiboot@gmail.com"
+  },
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}

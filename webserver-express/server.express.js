@@ -4,23 +4,14 @@ var app = express();
 
 var port = 3000;
 
-app.get("/", function(req, res){
-
-    res.send("quincho <b>millonario</b>");
-
+// this middleware will be executed for every request to the app
+app.use(function (req, res, next) {
+    res.contentType('application/json');
+    next();
+    res.end();
 });
 
-app.get("/api/users", function(req, res){
-
-    var users = [
-        {name: "zaiboot",  isValid: true, group:"Admin", today: new Date() }        ,
-        {name: "quincho",  isValid: true, group:"Millonario", today: new Date() }
-    ];
-
-    res.set("Content-Type", "application/json");
-    res.set("Content-Disposition", "attachment;filename='users.json'");
-
-    res.send( users );
-});
+var controllers = require("./controllers");
+controllers.init(app);
 
 http.createServer(app).listen(port);

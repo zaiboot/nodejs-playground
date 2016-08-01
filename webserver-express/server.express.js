@@ -8,7 +8,7 @@ var port = 3000;
 app.use(function (req, res, next) {
     res.contentType('application/json');
     next();
-    res.end();
+//    res.end();
 });
 
 var controllers = require("./controllers");

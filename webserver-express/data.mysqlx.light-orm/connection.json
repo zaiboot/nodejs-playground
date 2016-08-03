@@ -1,0 +1,8 @@
+{
+
+  "host"     : "localhost",
+  "user"     : "zaiboot",
+  "password" : "123",
+  "database" : "nodeTest"
+    
+}

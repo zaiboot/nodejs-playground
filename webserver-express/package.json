@@ -1,13 +1,21 @@
 {
   "name": "TheBoard",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "private": true,
   "description": "TheBoard",
   "main": "server.express.js",
   "author": {
     "name": "zaiboot",
     "email": "zaiboot@gmail.com"
   },
-  "dependencies": {
+  "dependencies":
+  {
     "express": "^4.14.0"
-  }
+  },
+
+  "repository": {
+      "type": "https",
+      "url": "https://github.com/zaiboot/nodejs-playground.git"
+    }
+
 }

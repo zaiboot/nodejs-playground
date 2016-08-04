@@ -8,14 +8,12 @@
     "name": "zaiboot",
     "email": "zaiboot@gmail.com"
   },
-  "dependencies":
-  {
-    "express": "^4.14.0"
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongodb": "^2.2.5"
   },
-
   "repository": {
-      "type": "https",
-      "url": "https://github.com/zaiboot/nodejs-playground.git"
-    }
-
+    "type": "https",
+    "url": "https://github.com/zaiboot/nodejs-playground.git"
+  }
 }

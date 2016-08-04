@@ -1,6 +1,6 @@
 (function( controllers ){
    
-   var data = require("../data.mysql.light-orm/");
+   var data = require("../data.mongodb/");
    var homeController = require("./homeController"); //no .js extension require, we can ommit it 
   // var userController = require("./userController");
 

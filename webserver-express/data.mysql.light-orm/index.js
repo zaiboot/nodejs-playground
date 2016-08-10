@@ -7,17 +7,17 @@
 //        next(null, mock.initialInformation);
 //    };
 
-var mysql = require('mysql'),
-    lightOrm = require('light-orm');
+var mysql = require("mysql"),
+    lightOrm = require("light-orm");
 
 
     data.getUsers = function(next){
         
-        lightOrm.driver = mysql.createConnection(require('./connection.json'));
+        lightOrm.driver = mysql.createConnection(require("./connection.json"));
         lightOrm.driver.connect();
         
         //fetch data
-        var userCollection = new lightOrm.Collection('User');
+        var userCollection = new lightOrm.Collection("User");
         //undefined = no filter at all.
         userCollection.find(undefined, function(err, models){
             // handle errors better

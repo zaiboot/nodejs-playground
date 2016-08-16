@@ -1,13 +1,19 @@
 (function(userController){
 
-    userController.init = function(app){
+    userController.init = function(app, data){
+        
+        var dal = data;
+
         app.get("/api/users", function(req, res){
 
-        var users = [
-            {name: "zaiboot",  isValid: true, group:"Admin", today: new Date() },
-            {name: "quincho",  isValid: true, group:"Millonario", today: new Date() }
-         ];
-         res.send(users);
+            data.getUsers(function(err, results){ 
+               if (err) {
+                res.send(err);
+               }else{
+                res.send(results);
+               }
+            });
+
         });
     };
 

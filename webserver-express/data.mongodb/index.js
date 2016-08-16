@@ -1,6 +1,25 @@
 (function(dataMongo){
     var database = require("./database");
 
+    dataMongo.getUsers = function(next){
+        database.getDb(function (err, db){
+            if (err){
+                next(err, null);
+
+            }else{
+                db.users.find().toArray(function(err, results){
+                    if (err){
+                        next(err, null);
+                    }else{
+                        next(null, results);    
+                    }
+                });
+            }
+        });
+        
+    };
+
+
     function seedDatabase(){
         
         console.log("Seeding database");

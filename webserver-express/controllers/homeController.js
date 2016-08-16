@@ -2,9 +2,10 @@
 
     homeController.init = function (app, data) {
       app.get("/", function(req, res){
-//          data.getUsers(function(err, data){
-//              res.send(data)
-                res.end();
+          res.send("test");
+//        data.getUsers(function(err, data){
+//        res.send(data)
+          res.end();
 //            });
         });
     };

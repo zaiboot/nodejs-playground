@@ -17,7 +17,8 @@
     "ejs": "^2.5.5",
     "express": "^4.14.0",
     "express-handlebars": "^3.0.0",
-    "jade": "^1.11.0"
+    "jade": "^1.11.0",
+    "mssql": "^3.3.0"
   },
   "devDependencies": {
     "bower": "^1.8.0",

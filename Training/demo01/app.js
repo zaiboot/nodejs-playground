@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 
 app.get('/', function(req, res) {
 
-    res.render('index', {list: ['a','B', 'c']});
+    res.render('index', {list: ['a','B', 'c'], title:'the title'});
 }).get('/books', function(req, res) {
 
     res.send('Hello Books');

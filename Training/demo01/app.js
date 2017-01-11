@@ -1,6 +1,9 @@
 var express = require('express');
 var app = express();
-
+var nav = [
+            {link: '/books', title: 'Books'},
+            {link: '/authors', title: 'Authors'}
+        ];
 var port = process.env.PORT || 50000;
 app.use(express.static('public'));
 //app.use(express.static('src/views'));
@@ -10,8 +13,11 @@ app.set('views', './src/views');
 //app.engine('.hbs', handlebars({extname: '.hbs'}));
 //app.set('view engine', '.hbs');
 app.set('view engine', 'ejs');
-
-var bookRouter = require('./routes/bookRoutes.js')(express);
+var bookRouterOptions = {
+    express: express,
+    nav: nav
+}
+var bookRouter = require('./routes/bookRoutes.js')(bookRouterOptions);
 app.use('/books', bookRouter);
 
 app.get('/', function(req, res) {
@@ -29,9 +35,6 @@ app.listen(port, function(err) {
 
 function generateBaseModel() {
     return {
-        nav: [
-                {link:'/books', title:'Books'},
-                {link:'/authors', title:'Authors'}
-            ],
+        nav: nav,
         title:'The Library'};
 }

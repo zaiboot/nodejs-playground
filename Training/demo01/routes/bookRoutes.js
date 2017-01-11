@@ -5,7 +5,7 @@ module.exports = function (express) {
             var model = generateBaseModel();
             model.title += ' | List of books';
             model = Object.assign({books: generateBooks()}, model);
-            res.render('bookListView', model);
+            res.render('books/bookListView', model);
         });
 
     bookRouter.route('/single/:bookid')
@@ -19,7 +19,7 @@ module.exports = function (express) {
                 return b.id === bookId;
             });
             model.title += ' | Single Book' + bookId;
-            res.render('bookView', model);
+            res.render('books/bookView', model);
         });
 
     return bookRouter;

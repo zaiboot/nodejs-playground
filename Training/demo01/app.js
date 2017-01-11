@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 var bookRouterOptions = {
     express: express,
     nav: nav
-}
+};
 var bookRouter = require('./routes/bookRoutes.js')(bookRouterOptions);
 app.use('/books', bookRouter);
 

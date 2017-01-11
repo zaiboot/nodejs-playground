@@ -16,7 +16,7 @@ module.exports = function (options) {
             nav: nav,
             title: 'The Library'
         };
-    }    
+    }
     bookRouter.route('/')
         .get(function (req, res) {
             var model = generateBaseModel();

@@ -11,13 +11,27 @@ app.set('views', './src/views');
 //app.set('view engine', '.hbs');
 app.set('view engine', 'ejs');
 
+var bookRouter = require('./routes/bookRoutes.js')(express);
+app.use('/books', bookRouter);
+
 app.get('/', function(req, res) {
-
-    res.render('index', {list: ['a','B', 'c'], title:'the title'});
-}).get('/books', function(req, res) {
-
-    res.send('Hello Books');
+    var model = generateBaseModel();
+    res.render('index', model);
 });
+
+// this route will be overriden by the bookRouter
+// .get('/books', function(req, res) {
+//     res.send('Hello Books');
+// });
 app.listen(port, function(err) {
     console.log('Running server on port: ', port);
 });
+
+function generateBaseModel() {
+    return {
+        nav: [
+                {link:'/books', title:'Books'},
+                {link:'/authors', title:'Authors'}
+            ],
+        title:'The Library'};
+}

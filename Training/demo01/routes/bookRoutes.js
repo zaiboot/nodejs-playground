@@ -10,11 +10,9 @@ module.exports = function (options) {
         return request.query('SELECT * FROM  books').then(function (recordset) {
             return recordset;
         });
-        // return [
-        //     {title: 'Lord of the Rings', author: 'J.R.R Tolkien', id: 1, read: true, genre: 'Fantasy'},
-        //     {title: 'Carrie', author: 'Stephen King', id: 2, read: false, genre: 'Horror'},
-        //     {title: 'La Casa de los Espiritus', author: 'Isabel Allende', id: 3, read: false, genre: 'Romanticism'}
-        // ];
+    }
+
+    function getSingleBook(bookId) {
 
     }
 
@@ -38,20 +36,34 @@ module.exports = function (options) {
         });
 
     bookRouter.route('/single/:bookid')
-        .get(function (req, res) {
-
+        .all(function(req, res, next) {
             var bookId = parseInt(req.params.bookid);
-            var model = generateBaseModel();
-            model.title += ' | Single Book' + bookId;
-
-            getListOfBooks().then(function (data) {
-                //should return the 1st element matching the condition
-                model.book = data.find(function (b) {
-                    return b.id === bookId;
-                });
-            }).then(function() {
-                res.render('books/bookView', model);
+            var ps = new sql.PreparedStatement();
+            ps.input('bookid', sql.Int);
+            ps.prepare('SELECT * FROM  books WHERE id = @bookid ', function(err) {
+                if (err) {
+                    console.log('Error preparing statement ');
+                }else {
+                    ps.execute({bookid:bookId}, function (err , recordset) {
+                            if (err) {
+                                console.log('Error getting single book ', bookId);
+                            }else {
+                                if (recordset.length === 0) {
+                                    res.status(404).send('not found');
+                                }else {
+                                    req.book = recordset[0];
+                                    next();
+                                }
+                            }
+                        });
+                }
             });
+        })
+        .get(function (req, res) {
+            var model = generateBaseModel();
+            model.title += ' | Single Book' + req.book.bookId;
+            model.book = req.book;
+            res.render('books/bookView', model);
         });
 
     return bookRouter;

@@ -18,6 +18,7 @@ var bookRouterOptions = {
     nav: nav
 };
 var bookRouter = require('./routes/bookRoutes.js')(bookRouterOptions);
+require('./mssql.config.js');
 app.use('/books', bookRouter);
 
 app.get('/', function(req, res) {

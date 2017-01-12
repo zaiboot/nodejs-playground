@@ -1,13 +1,17 @@
 var sql = require('mssql');
 
 var config = {
-    server: '(local)',
+    server: 'localhost',
     database: 'Library',
-    options: {
-        trustedConnection: true
-    }
+    user: 'sa',
+    password: 'Trintech1'
+    // options: {
+    //     trustedConnection: true
+    // }
 };
 
-sql.connect(config, function(err) {
+sql.connect(config, function (err) {
+    if (err) {
         console.log('error:', err);
-    });
+    }
+});

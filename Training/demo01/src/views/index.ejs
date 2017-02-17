@@ -40,11 +40,11 @@
     </div>
     <nav class="collapse navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
-      <% nav.forEach(function(el, index){ %>
+      <%  nav.forEach(function(el, index){ %>
         <li>
-          <a href="<%=el.link%>"><%=el.title%></a>
+          <a href="<%=el.link%>"><%=el.text%></a>
         </li>
-      <% }) %>
+      <% })%>     
       </ul>
       <ul class="nav navbar-right navbar-nav">
         <li class="dropdown">

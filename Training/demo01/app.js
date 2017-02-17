@@ -8,11 +8,8 @@ var port = process.env.PORT || 50000;
 app.use(express.static('public'));
 //app.use(express.static('src/views'));
 app.set('views', './src/views');
-//app.set('view engine', 'jade');
-//var handlebars = require('express-handlebars');
-//app.engine('.hbs', handlebars({extname: '.hbs'}));
-//app.set('view engine', '.hbs');
-app.set('view engine', 'ejs');
+initViewEngine(app);
+var bookRouter = express.Router();
 var bookRouterOptions = {
     express: express,
     nav: nav
@@ -21,21 +18,71 @@ var bookRouter = require('./routes/bookRoutes.js')(bookRouterOptions);
 require('./mssql.config.js');
 app.use('/books', bookRouter);
 
-app.get('/', function(req, res) {
-    var model = generateBaseModel();
+//should come from the DB
+var books = [
+    {
+        title: 'Lord of the Rings - Fellowship Of The Ring',
+        genre: 'Fantasy',
+        author: 'JR Tolkien',
+        read: true
+    },
+    {
+        title: 'La Casa de los Espiritus',
+        genre: 'Magical Romanticism',
+        author: 'Isabel Allende',
+        read: false
+    },
+    {
+        title: 'Carrie',
+        genre: 'Horror',
+        author: 'Stephen King',
+        read: false
+    }
+];
+bookRouter.route('/')
+    .get(function (req, res) {
+        var model = {
+            nav: [
+                {link: '/books', text: 'Books'},
+                {link: '/authors', text: 'Authors'}
+            ],
+            title: 'The Library | List of Books',
+            books: books
+        };
+        res.render('books', model);
+    });
+bookRouter.route('/single')
+    .get(function (req, res) {
+        res.send('hello single book');
+    });
+app.use('/books', bookRouter);
+
+app.get('/', function (req, res) {
+    var model = {
+        nav: [
+            {link: '/books', text: 'Books'},
+            {link: '/authors', text: 'Authors'}
+        ],
+        title: 'The Library'
+    };
+
     res.render('index', model);
 });
 
-// this route will be overriden by the bookRouter
-// .get('/books', function(req, res) {
+// this call will be overwritten by the bookRouter
+// app.get('/books', function (req, res) {
 //     res.send('Hello Books');
 // });
-app.listen(port, function(err) {
+app.listen(port, function (err) {
     console.log('Running server on port: ', port);
 });
 
-function generateBaseModel() {
-    return {
-        nav: nav,
-        title:'The Library'};
+function initViewEngine(app) {
+    //app.set('view engine', 'jade');
+    //var handlebars = require('express-handlebars');
+    //app.engine('.hbs', handlebars({extname: '.hbs'}));
+    //app.set('view engine', '.hbs');
+    app.set('view engine', 'ejs');
+
 }
+
